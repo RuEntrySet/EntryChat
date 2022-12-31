@@ -1,0 +1,59 @@
+mysql:
+  host: localhost
+  port: 3306
+  database: bubblemine
+  user: root
+  password: ''
+redis: #Для межсерверности (Обязательно к установке!)
+  host: localhost
+  port: 6379
+  password: frt6776
+messages:
+  prefix: '&f(&b!&f) '
+  no_permission: 'У вас нет &b<permission>&f разрешения для использования!'
+  cooldown: 'Подождите перед следующим сообщением &b<time>'
+  block_words: 'Ваше сообщение содержит запрещенные солова.'
+  caps: 'Ваше сообщение состоит на 40% из капса(Символов верхнего регистра)'
+  left: 'Чтобы писать в чат, вам нужно отыграть на сервере: &b<time>'
+permissions:
+  cooldown: 'hyperchat.bypass'
+  time: 'hyperchat.bypass.time'
+  admin: 'hyperchat.admin'
+settings:
+  cross: true
+  first_time: 1800
+  context: 'Спавн-1'
+  cooldown_time: 5
+  local_radius: 150
+  hover: '&fОтправлено с &b%context%'
+  local: '&f[&cL&f] %vault_prefix%&f%player_name%%vault_suffix%&f &8➪ &7<msg>'
+  global: '&f[&b<context>&f] %vault_prefix%&f%player_name%%vault_suffix%&f &8➪ &7<msg>'
+  time:
+    days: '%size%д.'
+    hours: '%size%ч.'
+    minute: '%size%м.'
+    seconds: '%size%с.'
+    now: 'Сейчас'
+  block_words:
+    - 'сук'
+    - 'сука'
+    - 'бля'
+    - 'блять'
+    - 'еба'
+    - 'хуй'
+    - 'пенис'
+    - 'пизд'
+    - 'хуесос'
+    - 'гандон'
+    - 'гондон'
+    - 'залупа'
+    - 'аутист'
+    - 'соси'
+    - 'еблан'
+    - 'play.holyworld.ru'
+    - 'holyworld'
+    - 'sunrise'
+    - 'sunmc'
+    - 'jetmine'
+    - 'mst'
+    - 'corona'

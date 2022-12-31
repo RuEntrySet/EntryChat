@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS `entrychat` (`id` INT(50) NOT NULL, `hash` LONGTEXT, PRIMARY KEY (`id`)) ENGINE = InnoDB;
