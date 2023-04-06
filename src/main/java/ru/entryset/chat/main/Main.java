@@ -4,10 +4,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import redis.clients.jedis.JedisPubSub;
-import ru.entryset.api.configuration.Config;
+import ru.entryset.api.bukkit.configuration.Config;
+import ru.entryset.api.bukkit.manager.Messager;
 import ru.entryset.api.database.Database;
-import ru.entryset.api.sync.redis.Redis;
-import ru.entryset.api.tools.Messager;
+import ru.entryset.api.redis.Redis;
 import ru.entryset.chat.mysql.MySQLExecutor;
 import ru.entryset.chat.events.Events;
 
@@ -82,6 +82,7 @@ public class Main extends JavaPlugin {
     public void onDisable(){
         MySQLExecutor.update2();
         base.close();
+        redis.close();
     }
 
     private void registerEvents() {

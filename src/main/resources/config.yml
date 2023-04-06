@@ -15,6 +15,7 @@ messages:
   block_words: 'Ваше сообщение содержит запрещенные солова.'
   caps: 'Ваше сообщение состоит на 40% из капса(Символов верхнего регистра)'
   left: 'Чтобы писать в чат, вам нужно отыграть на сервере: &b<time>'
+  do_not: 'Нельзя писать в чат знак &b='
 permissions:
   cooldown: 'hyperchat.bypass'
   time: 'hyperchat.bypass.time'

@@ -2,7 +2,7 @@ package ru.entryset.chat.message;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import ru.entryset.api.tools.Messager;
+import ru.entryset.api.bukkit.manager.Messager;
 import ru.entryset.chat.main.Main;
 
 public class Message {
@@ -36,7 +36,7 @@ public class Message {
             Main.messager.sendMessage(getSender(), Main.config.getMessage("block_words"));
             return;
         }
-        String content = Messager.color(Main.messager.formApi(getType().getFormat(), getSender())).replace("<msg>", getMessage());
+        String content = Messager.color(Messager.parseApi(getType().getFormat(), getSender())).replace("<msg>", getMessage());
         Utils.updateLastMessage(getSender().getUniqueId());
         if (getType() == MessageType.GLOBAL) {
             sendGlobal(content);
@@ -47,7 +47,7 @@ public class Message {
 
     private void sendGlobal(String content){
         if(Main.config.getBoolean("settings.cross")){
-            Utils.msg(content, Main.config.getSettings("context"));
+            Utils.msg(content, Main.config.getSettings().getString("context"));
             return;
         }
         for(Player player : Bukkit.getOnlinePlayers()){
@@ -58,7 +58,7 @@ public class Message {
     private void sendLocal(String content){
         for(Player player : Bukkit.getOnlinePlayers()){
             if(getSender().getWorld().equals(player.getWorld())){
-                if(getSender().getLocation().distance(player.getLocation()) <= Main.config.getInt("settings.local_radius")){
+                if(getSender().getLocation().distance(player.getLocation()) <= Main.config.getSettings().getInt("local_radius")){
                     player.sendMessage(content);
                 }
             }
@@ -70,7 +70,7 @@ public class Message {
             return false;
         }
         boolean result = false;
-        for(String section : Main.config.getStringList("settings.block_words")){
+        for(String section : Main.config.getSettings().getStringList("block_words")){
             if(message.toLowerCase().contains(section.toLowerCase())){
                 result = true;
                 break;

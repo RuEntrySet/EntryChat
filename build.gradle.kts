@@ -1,11 +1,9 @@
 plugins {
-    id("java-library")
-    id("com.github.johnrengelman.shadow") version("6.1.0")
-    id("fr.il_totore.manadrop") version("0.4-SNAPSHOT")
+    java
 }
 
-group = "ru.entryset"
-version = "1.0.0"
+group = "org.example"
+version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -26,12 +24,12 @@ repositories {
 dependencies {
     val library = "C:\\Users\\t9154\\Desktop\\Исходники\\Library/"
 
+    //shadow(files(library + "spigot-1.12.2-NMS.jar"))
     compileOnly("org.spigotmc:spigot-api:1.19.3-R0.1-SNAPSHOT")
 
-    shadow(files(library + "vault.jar"))
-
-    implementation("ru.entryset:api:3.2.4")
     implementation("redis.clients:jedis:4.2.0")
+
+    implementation("ru.entryset:api:3.5.3")
 
     compileOnly("me.clip:placeholderapi:2.10.9")
 
@@ -41,14 +39,4 @@ dependencies {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
-}
-
-tasks {
-    jar {
-        enabled = false
-        dependsOn(shadowJar)
-    }
-}
-tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
 }

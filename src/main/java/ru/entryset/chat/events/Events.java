@@ -42,8 +42,7 @@ public class Events implements Listener {
             }
             if(time < Main.config.getInt("settings.first_time")){
                 Main.messager.sendMessage(player, Main.config.getMessage("left")
-                                .replace("<time>", Utils.format(Main.config.getInt("settings.first_time") - time))
-                , true);
+                                .replace("<time>", Utils.format(Main.config.getInt("settings.first_time") - time)));
                 e.setCancelled(true);
                 return;
             }
@@ -56,7 +55,7 @@ public class Events implements Listener {
         String message = e.getMessage();
 
         if(message.contains("=")){
-            Main.messager.sendMessage(player, "Нельзя писать в чат знак &b=", true);
+            Main.messager.sendMessage(player, Main.config.getMessage("do_not"));
             e.setCancelled(true);
             return;
         }

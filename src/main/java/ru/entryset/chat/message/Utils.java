@@ -15,18 +15,18 @@ public class Utils {
 		StringBuilder sb = new StringBuilder();
 
 		if (days != 0)
-			sb.append(Main.config.getSettings("time.days").replace("%size%", "" + days)).append(" ");
+			sb.append(Main.config.getSettings().getString("time.days").replace("%size%", "" + days)).append(" ");
 		if (hours != 0)
-			sb.append(Main.config.getSettings("time.hours").replace("%size%", "" + hours)).append(" ");
+			sb.append(Main.config.getSettings().getString("time.hours").replace("%size%", "" + hours)).append(" ");
 		if (minutes != 0)
-			sb.append(Main.config.getSettings("time.minute").replace("%size%", "" + minutes)).append(" ");
+			sb.append(Main.config.getSettings().getString("time.minute").replace("%size%", "" + minutes)).append(" ");
 		if (seconds != 0)
-			sb.append(Main.config.getSettings("time.seconds").replace("%size%", "" + seconds)).append(" ");
+			sb.append(Main.config.getSettings().getString("time.seconds").replace("%size%", "" + seconds)).append(" ");
 
 		String str = sb.toString().trim();
 
 		if (str.isEmpty())
-			str = Main.config.getSettings("time.now");
+			str = Main.config.getSettings().getString("time.now");
 		return str;
 	}
 

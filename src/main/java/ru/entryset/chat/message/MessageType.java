@@ -1,12 +1,11 @@
 package ru.entryset.chat.message;
 
-import ru.entryset.api.tools.Messager;
 import ru.entryset.chat.main.Main;
 
 public enum MessageType {
 
-    LOCAL(Messager.color(Main.config.getSettings("local"))),
-    GLOBAL(Messager.color(Main.config.getSettings("global")));
+    LOCAL(Main.config.getSettings().getString("local")),
+    GLOBAL(Main.config.getSettings().getString("global"));
 
     private final String format;
 
