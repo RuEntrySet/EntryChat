@@ -2,12 +2,23 @@ package ru.entryset.chat.main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import ru.entryset.api.redis.Redis;
 import ru.entryset.chat.mysql.MySQLExecutor;
 
 import java.time.Instant;
 import java.util.UUID;
 
 public class Subject{
+
+    private Redis redis;
+
+    public Subject(Redis redis) {
+        this.redis = redis;
+    }
+
+    public Redis getRedis() {
+        return redis;
+    }
 
     synchronized void msg(String base, String context){
         Bukkit.getScheduler().callSyncMethod(Main.getInstance(), () -> {

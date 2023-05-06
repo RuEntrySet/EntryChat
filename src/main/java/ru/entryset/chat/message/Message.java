@@ -25,7 +25,7 @@ public class Message {
     }
 
     public void send() {
-        if(getSender().hasPermission("hyperchat.color")){
+        if(getSender().hasPermission("entrychat.color")){
             setMessage(Messager.color(getMessage()));
         }
         if(hasCaps(getMessage())){

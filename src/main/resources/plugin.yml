@@ -2,5 +2,6 @@ name: EntryChat
 main: ru.entryset.chat.main.Main
 version: 1.0
 api-version: 1.13
+depend: [EntryBridge]
 softdepend: [PlaceholderAPI]
 author: EntrySet

@@ -1,9 +1,3 @@
-mysql:
-  host: localhost
-  port: 3306
-  database: bubblemine
-  user: root
-  password: ''
 redis: #Для межсерверности (Обязательно к установке!)
   host: localhost
   port: 6379
@@ -17,9 +11,9 @@ messages:
   left: 'Чтобы писать в чат, вам нужно отыграть на сервере: &b<time>'
   do_not: 'Нельзя писать в чат знак &b='
 permissions:
-  cooldown: 'hyperchat.bypass'
-  time: 'hyperchat.bypass.time'
-  admin: 'hyperchat.admin'
+  cooldown: 'entrychat.bypass'
+  time: 'entrychat.bypass.time'
+  admin: 'entrychat.admin'
 settings:
   cross: true
   first_time: 1800

@@ -6,7 +6,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import redis.clients.jedis.JedisPubSub;
 import ru.entryset.api.bukkit.configuration.Config;
 import ru.entryset.api.bukkit.manager.Messager;
-import ru.entryset.api.database.Database;
 import ru.entryset.api.redis.Redis;
 import ru.entryset.chat.mysql.MySQLExecutor;
 import ru.entryset.chat.events.Events;
@@ -23,8 +22,6 @@ public class Main extends JavaPlugin {
 
     public static Messager messager;
 
-    public static Database base;
-
     public static Redis redis;
 
     public HashMap<UUID, Long> time = new HashMap<>();
@@ -33,7 +30,7 @@ public class Main extends JavaPlugin {
 
     public HashMap<UUID, Instant> lastMessage = new HashMap<>();
 
-    public final Subject subject = new Subject();
+    public static Subject subject;
 
     @Override
     public void onEnable() {
@@ -41,12 +38,14 @@ public class Main extends JavaPlugin {
         config = new Config(this, "config.yml");
         messager = new Messager(config);
         redis = config.getRedis("redis");
-        base = config.getMysqlDatabase("mysql");
-        base.start();
+        subject = new Subject(config.getRedis("redis"));
         MySQLExecutor.createTableProducts();
         registerEvents();
         sub();
         MySQLExecutor.check();
+        for(Player player : Bukkit.getOnlinePlayers()){
+            Main.getInstance().lastMap.put(player, Instant.now());
+        }
     }
 
     public void sub(){
@@ -72,7 +71,7 @@ public class Main extends JavaPlugin {
                     }
                 }
             };
-            config.getRedis("redis").getJedis().subscribe(jedisPubSub, "EntryChat");
+            subject.getRedis().getJedis().subscribe(jedisPubSub, "EntryChat");
         };
         Thread thread = new Thread(task);
         thread.start();
@@ -81,8 +80,8 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable(){
         MySQLExecutor.update2();
-        base.close();
         redis.close();
+        subject.getRedis().close();
     }
 
     private void registerEvents() {
