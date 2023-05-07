@@ -71,7 +71,9 @@ public class Main extends JavaPlugin {
                     }
                 }
             };
-            subject.getRedis().getJedis().subscribe(jedisPubSub, "EntryChat");
+            if(subject.getRedis().getJedis().isConnected()){
+                subject.getRedis().getJedis().subscribe(jedisPubSub, "EntryChat");
+            }
         };
         Thread thread = new Thread(task);
         thread.start();
