@@ -1,7 +1,3 @@
-redis: #Для межсерверности (Обязательно к установке!)
-  host: localhost
-  port: 6379
-  password: frt6776
 messages:
   prefix: '&f(&b!&f) '
   no_permission: 'У вас нет &b<permission>&f разрешения для использования!'

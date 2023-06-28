@@ -2,8 +2,8 @@ package ru.entryset.chat.message;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import ru.entryset.api.bukkit.manager.Messager;
-import ru.entryset.chat.main.Main;
+import ru.entryset.chat.EntryChat;
+import ru.entryset.core.bukkit.bukkit.manager.Messager;
 
 public class Message {
 
@@ -29,11 +29,11 @@ public class Message {
             setMessage(Messager.color(getMessage()));
         }
         if(hasCaps(getMessage())){
-            Main.messager.sendMessage(getSender(), Main.config.getMessage("caps"));
+            EntryChat.messager.sendMessage(getSender(), EntryChat.config.getMessage("caps"));
             return;
         }
         if(hasWords(getMessage())){
-            Main.messager.sendMessage(getSender(), Main.config.getMessage("block_words"));
+            EntryChat.messager.sendMessage(getSender(), EntryChat.config.getMessage("block_words"));
             return;
         }
         String content = Messager.color(Messager.parseApi(getType().getFormat(), getSender())).replace("<msg>", getMessage());
@@ -46,8 +46,8 @@ public class Message {
     }
 
     private void sendGlobal(String content){
-        if(Main.config.getBoolean("settings.cross")){
-            Utils.msg(content, Main.config.getSettings().getString("context"));
+        if(EntryChat.config.getBoolean("settings.cross")){
+            Utils.msg(content, EntryChat.config.getSettings().getString("context"));
             return;
         }
         for(Player player : Bukkit.getOnlinePlayers()){
@@ -58,7 +58,7 @@ public class Message {
     private void sendLocal(String content){
         for(Player player : Bukkit.getOnlinePlayers()){
             if(getSender().getWorld().equals(player.getWorld())){
-                if(getSender().getLocation().distance(player.getLocation()) <= Main.config.getSettings().getInt("local_radius")){
+                if(getSender().getLocation().distance(player.getLocation()) <= EntryChat.config.getSettings().getInt("local_radius")){
                     player.sendMessage(content);
                 }
             }
@@ -66,11 +66,11 @@ public class Message {
     }
 
     private boolean hasWords(String message){
-        if(getSender().hasPermission(Main.config.getPermission("admin"))){
+        if(getSender().hasPermission(EntryChat.config.getPermission("admin"))){
             return false;
         }
         boolean result = false;
-        for(String section : Main.config.getSettings().getStringList("block_words")){
+        for(String section : EntryChat.config.getSettings().getStringList("block_words")){
             if(message.toLowerCase().contains(section.toLowerCase())){
                 result = true;
                 break;
@@ -80,7 +80,7 @@ public class Message {
     }
 
     private boolean hasCaps(String message){
-        if(getSender().isOp() || getSender().hasPermission(Main.config.getPermission("admin"))){
+        if(getSender().isOp() || getSender().hasPermission(EntryChat.config.getPermission("admin"))){
             return false;
         }
         char[] chars = message.toCharArray();
