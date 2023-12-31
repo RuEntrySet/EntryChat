@@ -82,7 +82,7 @@ public class Events implements Listener {
 
         Player player = e.getPlayer();
 
-        if(!player.hasPermission(EntryChat.config.getPermission("admin")) && !player.hasPermission(EntryChat.config.getPermission("time"))){
+        if(!player.hasPermission(EntryChat.config.getPermission("admin")) && !player.hasPermission(EntryChat.config.getPermission("time")) && e.getMessage().startsWith("!")){
             long time = Duration.between(EntryChat.getInstance().lastMap.get(player), Instant.now()).getSeconds();
             if(EntryChat.getInstance().time.containsKey(player.getUniqueId())){
                 time = time + EntryChat.getInstance().time.get(player.getUniqueId());
