@@ -107,7 +107,7 @@ public class Events implements Listener {
             return;
         }
 
-        if(!player.hasPermission(EntryChat.config.getPermission("cooldown"))){
+        if(!player.hasPermission(EntryChat.config.getPermission("cooldown")) && !e.getMessage().startsWith("!")){
             if(EntryChat.getInstance().lastMessage.containsKey(player.getUniqueId())){
                 Instant last = EntryChat.getInstance().lastMessage.get(player.getUniqueId());
                 Instant now = Instant.now();
